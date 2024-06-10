@@ -30,11 +30,11 @@ Bu proje için kullanımı ve uygulaması daha kolay olay Retreival Augmented Ge
 
 Şimdi proje kodlarını açıklayalım.
 
-### 1-) Gerekli Kütüphanelerin İmport Edilmesi:
+Öncelikle proje için gerekli kütüphaneleri import ediyoruz. Bu kütüphanerin nasıl ve ne amaçla kullanıldıklarını ilerleyen bölümlerde anlatacağım.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/69aa3d20-9a45-4d80-8d2d-21da09a92615)
+Not: API anahtarını sildiğim için kullanamazsınız sadece örnek olması açısından proje dosyasında görünmektedir
 
-Proje için gerekli kütüphaneleri import ediyoruz. Bu kütüphanerin nasıl ve ne amaçla kullanıldıklarını ilerleyen bölümlerde anlatacağım.
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/69aa3d20-9a45-4d80-8d2d-21da09a92615).
 
 Şimdi içinde satıcı-alıcı soru cevap ve müşteri yorumlarının yer aldığı metinleri dizinden okuyalım.
 
@@ -48,7 +48,7 @@ Son olarak VectorStore'a bir soru sorup getirdiği cevapları kontrol ediyoruz. 
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/be6c6a5b-8af6-49a2-b478-8927f66325ea)
 
-Ardından bir Retreiver nesnesi oluşturuyoruz bunu kullandığımız VectorStore'u basitçe bir retreiver'a dönüştürerek yapıyoruz. Son olarak kullanacağımız dil modelini (bu projede GPT-3.5 kullanmılmıştır) oluşturuyoruz.
+Ardından bir Retreiver nesnesi oluşturuyoruz bunu kullandığımız VectorStore'u basitçe bir retreiver'a dönüştürerek yapıyoruz. Son olarak kullanacağımız dil modelini (bu projede GPT-3.5 kullanmılmıştır) oluşturuyoruz. (Temperature parameteresini modelin çıktılarını daha deterministik yapmak adına 0.1 gibi düşük bir değere ayarladım)
 
 Şimdi örnek bir prompt oluşturuyoruz, bu promp'da bildiğiniz gibi context kısmına soru ile alaklı VectoreStore'dan getirilen içerikler gelecek. Question kısmında ise kullanıcını sorusu yer alacak. Ardından LangChain'in bize sunduğu Chain yönteminden yararlanarak retreiver'dan getirilen sonucu prompt'un içine alan, ardından bunu LLM'ye aktaran ve son olarak LLM çıktısnı daha anlaşılabilir bir şekilde osn kullanıcıyı gösteren bir OutputParser kullanarak bir chain (zincir) oluşturuyoruz.
 
@@ -85,6 +85,28 @@ Ardından içinde hem yukarıda belirtilen "system prompt" hem geçmiş sohbeti 
 Gördüğünüz gibi model ikinci soruda sorunun ilk soru ile bağlantılı olduğunu anladı, soruyu tekrar düzenledi ve tüm adımlarını gerçekleştirerek soruyu cevapladı.
 
 Şimdi bu uygulama için Gradfio ile basit bir arayüz oluşturup tekrar sorular soralım ve cevapları görelim.
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/2c697a78-ec67-475e-85e9-9969af2d62d6)
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/f096c16c-7d11-4543-b91c-e9750935d958)
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/74906675-6587-453b-bb29-46ecf97d5604)
+
+Sonuçlar oldukça iyi gözüküyor. Elbete bir e-ticaret web sitesinin sahip olduğu veriler ve daha gelişmiş özellikle de Türkçe dilinde daha iyi performans gösteren, örneğin Türkçe veriler ile fine-tuning edilmiş bir model farklı bir performans gösterebilir. Fakat bu tür bir uygulamanın yüksek miktarda kaliteli veri ve daha gelişmiş yöntemlerle kullanıcı memnuniyetini ve tüketim alışkanlıklarını geliştirip değiştireceği açıktır. Bunlara ek olarak RAG yönteminde farklı yaklaşımlar ve yöntemler olduğunu da belirtmek önemlidir. Mesela retreiver üzerinde arama yaparken semantik arama ile birlikte BS-25 türü farklı arama algoritmalalarını kullanmak modelin performansını artırabilir. Fakat bu proje bir giriş mahiyetinde bir örnek proje olduğu için çok detaylara girmedim.
+
+## Sonuç:
+
+Bu proje, e-ticaret sitelerinde müşterilerin ürünlerle ilgili sorularını hızlı ve doğru bir şekilde cevaplayabilen bir Soru-Cevap uygulaması geliştirme amacına başarılı bir şekilde ulaşmıştır. Retrieval Augmented Generation (RAG) tekniğini kullanarak oluşturulan bu sistem, müşteri memnuniyetini artırmanın yanı sıra 24/7 destek sağlama, detaylı bilgi sunma, geri bildirim toplama ve satışları artırma gibi pek çok fayda sunmaktadır. Uygulamanın basit arayüzü sayesinde kullanıcılar, sorularına anında yanıt alabilirler. Bu proje, yüksek kaliteli veri ve gelişmiş yöntemlerle daha da iyileştirilebilir, ancak mevcut haliyle bile müşteri deneyimini olumlu yönde etkileme potansiyeline sahiptir.
+
+
+
+
+
+
+
+
+
+
 
 
 
