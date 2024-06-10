@@ -72,6 +72,25 @@ Ardından içinde hem yukarıda belirtilen "system prompt" hem geçmiş sohbeti 
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/a170414e-dd8f-487b-a476-20b5247dffb8)
 
+Şimdi tüm bu oluşturduğumuz fonksiyonları bir araya getirelim.
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/b92eb5ef-7207-4e9f-b422-bbab5c791962)
+
+Şimdi bir kaç örnek soru soralım ve modelin cevaplarını görelim.
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/14a3d667-b947-434c-bcd2-93f6976b1506)
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/08fa5558-e5bc-466c-b078-5433a0ee7ed3)
+
+Gördüğünüz gibi model ikinci soruda sorunun ilk soru ile bağlantılı olduğunu anladı, soruyu tekrar düzenledi ve tüm adımlarını gerçekleştirerek soruyu cevapladı.
+
+Şimdi bu uygulama için Gradfio ile basit bir arayüz oluşturup tekrar sorular soralım ve cevapları görelim.
+
+
+
+
+
+
 
 
 
