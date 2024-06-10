@@ -1,5 +1,3 @@
-# QA-using-RAG-and-OPENAI
-
 # Giriş:
 Merhaba, bu projede büyük dil modellerini ve Retreival Augmented Generation (RAG) tekniğini kullanarak bir e-ticaret sitesi için müşterilerin ürünler hakkında sorular sorup cevap alabileceği bir Soru-Cevap uygulaması oluşturacağız. Ardından basit arayüz ile bu uygulamaya erişip test edeceğiz.
 
