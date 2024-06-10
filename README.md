@@ -3,7 +3,7 @@ Merhaba, bu projede büyük dil modellerini ve Retreival Augmented Generation (R
 
 ## Proje'nin Amaçları:
 
-1-) Bu proje ile web sitemizde yer alan ürünler ile alakalı olarak müşterilerin sahip oldukları soruları kolayca sorup cevap alabilecekleri bir soru cevap uygulaması geliştireceğiz. Böyle bir uygulamanın müşteriler için pek çok faydası bulunmaktadır. İşte sıralayabileceğimiz bazı faydalar:
+Bu proje ile web sitemizde yer alan ürünler ile alakalı olarak müşterilerin sahip oldukları soruları kolayca sorup cevap alabilecekleri bir soru cevap uygulaması geliştireceğiz. Böyle bir uygulamanın müşteriler için pek çok faydası bulunmaktadır. İşte sıralayabileceğimiz bazı faydalar:
 
 * Müşteri Memnuniyetini Artırmak: Müşterilere ürünler hakkında hızlı ve doğru bilgi sağlayarak memnuniyeti artırmak.
 * 24/7 Destek: Soru-cevap uygulaması sayesinde müşteriler, mesai saatleri dışında bile sorularına yanıt bulabilirler.
