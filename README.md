@@ -68,10 +68,12 @@ Mesela sohbet robotuna "İphone 14'ün kaç megapiksellik bir kamerası vardır"
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/248ef05f-c3cc-4f14-90b4-088514e2f82e)
 
-Ardından içinde hem yukarıda belirtilen "system prompt" hem geçmiş sohbeti barındıran "chat history" hem de kullanıcını sorusunu barındıran bir prompt oluşturalım.
+Ardından içinde hem yukarıda belirtilen "system prompt" hem geçmiş sohbeti barındıran "chat history" hem de kullanıcını sorusunu barındıran bir prompt oluşturalım ve bu prompt ile LLM'i create_stuff_documents_chain fonksiyonun kullanarak birleştirelim.
+
+![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/a170414e-dd8f-487b-a476-20b5247dffb8)
 
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/82b188e0-f8f2-456d-bfb1-24764f5b509e)
+
 
 
 
