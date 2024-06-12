@@ -3,21 +3,30 @@
 ## Introduction:
 Hello everyone, in this project, we will create a Q&A application for an e-commerce website where customers can ask questions about the products and get answers using Large Language Models and Retreival Augmented Generation (RAG) technique. Then we will access and test this application with a simple interface.
 
-### Note: This article assumes that you have a basic knowledge of LLMs and RAG technique.
+### Note: The objective of this project is to illustrate one of the use cases of the RAG technique, so it assumes that you have a basic knowledge of LLMs and the RAG technique.
 
-## Proje'nin Amaçları:
+## Goals of Project:
 
-Bu proje ile web sitemizde yer alan ürünler ile alakalı olarak müşterilerin sahip oldukları soruları kolayca sorup cevap alabilecekleri bir soru cevap uygulaması geliştireceğiz. Böyle bir uygulamanın müşteriler için pek çok faydası bulunmaktadır. İşte sıralayabileceğimiz bazı faydalar:
+With this project, we will develop a question-answering application where customers can easily ask questions about the products on our website and get answers. This application has many benefits for customers. Here are some benefits we can list:
+* Increasing Customer Satisfaction: To increase satisfaction by providing customers with fast and accurate information about products.
 
-* Müşteri Memnuniyetini Artırmak: Müşterilere ürünler hakkında hızlı ve doğru bilgi sağlayarak memnuniyeti artırmak.
-* 24/7 Destek: Soru-cevap uygulaması sayesinde müşteriler, mesai saatleri dışında bile sorularına yanıt bulabilirler.
-* Detaylı Bilgi Sağlama: Ürünlerle ilgili sıkça sorulan sorular ve cevaplar, potansiyel müşterilere detaylı bilgi sunar.
-* Hızlı ve Kolay Erişim: Müşteriler, ürünlerle ilgili sorularına anında cevap alabilirler, bu da müşteri deneyimini olumlu yönde etkiler.
-* Geri Bildirim Toplamak: Müşterilerin soruları ve geri bildirimleri sayesinde ürün geliştirme ve iyileştirme süreçlerine katkıda bulunmak.
-* İletişim Kolaylığı Sağlamak: Müşterilerin soru sorma sürecini kolaylaştırarak müşteri hizmetlerine olan talebi azaltmak.
-* Satışları Artırmak: Ürünler hakkında detaylı bilgi sahibi olan müşterilerin satın alma kararlarını hızlandırmak ve böylece satışları artırmak.
-* Tavsiyeler Sunmak: Müşterilerin içinde bulundukları duruma göre (örneğin bir hediye almak sürecinde) onları yönlendirmek ve yardımcı olmak.
-* Analitik Veri Sağlama: Müşterilerin en çok hangi konularla ilgilendiğini ve hangi soruları sorduğunu analiz ederek, ürün ve hizmet geliştirme süreçlerine veri sağlama imkanı sunar.
+* Providing Detailed Information: Frequently asked questions and answers about products provide detailed information to potential customers.
+  
+* Quick and Easy Access: Customers can get instant answers to their questions about products, which positively affects the customer experience.
+
+* Collecting Feedback: Contributing to product development and improvement processes through customers' questions and feedback.
+
+* Providing Ease of Communication: Reducing the demand for customer service by facilitating the process of customers asking questions.
+
+* Increasing Sales: To accelerate the purchasing decisions of customers who have detailed information about the products and thus increase sales.
+
+* Providing Recommendations: Guiding and helping customers according to the situation they are in (for example, in the process of buying a gift).
+
+* Providing Analytical Data: It provides the opportunity to provide data to product and service development processes by analysing which topics customers are most interested in and which questions they ask.
+
+* 24/7 Support: Through the question-answering application, customers can find answers to their questions even outside office hours.
+
+Now that you've got the concept, let's write the code to build it.
 
 
 # Detaylı Açıklama:
