@@ -1,5 +1,9 @@
-# Giriş:
-Merhaba, bu projede büyük dil modellerini ve Retreival Augmented Generation (RAG) tekniğini kullanarak bir e-ticaret sitesi için müşterilerin ürünler hakkında sorular sorup cevap alabileceği bir Soru-Cevap uygulaması oluşturacağız. Ardından basit arayüz ile bu uygulamaya erişip test edeceğiz.
+# Creating a Conversational Question-Answering Bot Using LLM and RAG Technique for an E-Commerce Website:
+
+## Introduction:
+Hello everyone, in this project, we will create a Q&A application for an e-commerce website where customers can ask questions about the products and get answers using Large Language Models and Retreival Augmented Generation (RAG) technique. Then we will access and test this application with a simple interface.
+
+### Note: This article assumes that you have a basic knowledge of LLMs and RAG technique.
 
 ## Proje'nin Amaçları:
 
