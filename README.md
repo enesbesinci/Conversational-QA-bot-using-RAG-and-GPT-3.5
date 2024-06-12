@@ -29,35 +29,31 @@ With this project, we will develop a question-answering application where custom
 Now that you've got the concept, let's write the code to build it.
 
 
-# Detaylı Açıklama:
+### Dataset we will be using:
 
-## 1-) Modelde kullanmak üzere veri setinin hazırlanması:
+The dataset we will be using within the scope of this project will be the data containing the comments made about the products sold in our e-commerce website, seller-buyer question-answers and technical specifications of the products. These data are quite easily accessible data for an e-commerce website. However, within the scope of this project, I generated synthetic seller-buyer question-answers and product comments using different large language models (Gemini, ChatGPT, Mistral). I generated these comments in 3 different tones: positive, negative and neutral. Then, I took the data containing the technical specifications of the products from technology sites such as Teknosa and Vatan Computer. In the GitHub Repo where this article is located, you can find the fake Q&A conversations and user comments I generated under the text files 'teknik_ozellikler.txt' and 'yorum_soru_cevap.txt' and use them for your own projects.
 
-Bu proje kapsamında veri setimiz sitemizde yer alan ürünleri altında yer alan yorumlar, satıcı-alıcı soru cevapları ve ürünlere ait teknik özelliklerin yer aldığı veriler olacaktır. Bu veriler bir e-ticaret sitesi için oldukça kolay erişilebilecek verilerdir. Fakat bu proje kapsamında ben farklı büyük dil modellerini (Gemini,ChatGPT,Mistral) kullanarak sentetik satıcı-alıcı soru cevap, ürün yorumları ürettim. Bu yorumları pozitif, negatif ve nötr olacak şekilde 3 farklı tonda ürettirdim . Son olarak ürünlerin teknik özelliklerini yer aldığı verileri ise Teknosa, Vatan Bilgisayar gibi teknoloji sitelerinden aldım. Bu yazının bulundupu GitHub Repo'sunda ürettiğim sahte soru-cevap ve kullanıcı yorumlarını "teknik_ozellikler.txt", "yorum_soru_cevap.txt" text dosyaları altında bulabilir ve kendi projeleriniz için kullanabilirsiniz.
+### Coding:
 
-## 2-) Proje Aşamaları:
+Firstly, we import the necessary libraries for the project. We will show how and for what purpose these libraries are used in the following sections.
 
-Bu proje için kullanımı ve uygulaması daha kolay olay Retreival Augmented Generation yöntemini tercih ettim. Bunun sebebi bir dil modelini fine-tuning etmenin RAG yöntemine kıyasla çok daha teknik personel ve donanım (hesaplama gücü) gerektirmesidir. Bunun yerine bir dil modelinin çıktısını sürekli olarak güncelleyebileceğimiz bir veritabanı ile desteklemek hem uygulaması hem de gerektirdiği teknik ve hesaplama gücü açısından çok daha uygun bir çözüm olarak gözükmesidir.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/af204185-950f-4c19-a330-97fb3bcb8ecf)
 
-Şimdi proje kodlarını açıklayalım.
+Now let's read the texts docs from the index, in which there are seller-buyer questions and answers and customer comments and technical properties of the products we sold in our website.
 
-Öncelikle proje için gerekli kütüphaneleri import ediyoruz. Bu kütüphanerin nasıl ve ne amaçla kullanıldıklarını ilerleyen bölümlerde anlatacağım.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/c402608b-2283-4427-ac40-e62872acdfb4)
 
-Not: API anahtarını sildiğim için kullanamazsınız sadece örnek olması açısından proje dosyasında görünmektedir
+We have stored our data in a variable called ‘docs’, but there is a problem. Language Models have a limited context window, so if we pass all the data to the prompt of a language model at once, the model cannot successfully understand which context (questions-answers or comments) to use for the question, so we split our text data into smaller pieces called chunks. I use a smaller chunk_size and chunk_overlap because our data consists of small chunks of text such as questions, answers and comments.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/69aa3d20-9a45-4d80-8d2d-21da09a92615).
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/3e213ff1-8e90-4e12-93a3-0ea2899ec8c5)
 
-Şimdi içinde satıcı-alıcı soru cevap ve müşteri yorumlarının yer aldığı metinleri dizinden okuyalım.
+Then we need to store the chunked data in a VectorStore. For this we need a VectorStore and an Embeeding model to embed the chunks. For this, you can use different Embeeding models in HuggingFace (you can search by typing Setence-Transformer). But since we are working with Turkish data in this project, we will continue with OpenAI's Embeeding model. The reason for this is that I tried different Embeeding models in HuggingFace, but I got the most successful result with OpenAI's Embeeding model.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/0e63c80f-9b00-45ec-8ea7-729b6065a88f)
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/969d6396-5508-4c6d-81d9-03579f2192d8)
 
-Verilerimizi "docs" adlı değişken içinde saklıyoruz. Fakat bir sorun var. Dil Modellerinin belirli bir bağlam penceresi vardır, dolayısıyla tüm verileri tek seferde bir dil modelinin promptuna aktarırsak model buradan hangi soru-cevapların veya yorumların kullanacağını başarılı bir şekilde kestiremez dolayısıyla verilerimizi chunks adı verilen daha küçük parçalara bölüyoruz. Elimizdeki veriler soru-cevap ve yorumlardan oluştuğu için daha küçük bir chunk_size ve chunk_overlap kullanıyorum.
+Finally, we ask VectorStore a question and check the answers. The results look good.
 
-Ardından chunklar haline getirdiğim verileri bir VectorStore'da depolamamız gerekiyor. Bunun için HuggingFace'de yer alan farklı Embeeding modellerini (Setence-Transformer yazarak bulabilirsiniz) kullanabilirsiniz. Ayrıca bu proje kapsamında Türkçe yorumlar ile çalıştığım için farklı Embeeding modellerini denedim ve sonuç olarak en başarılı olanının OpenAI'nın Embeeding modeli olduğuna karar verdim. Bu sebeple OpenAI Embeeding modeli ile devam edeceğiz.
-
-Son olarak VectorStore'a bir soru sorup getirdiği cevapları kontrol ediyoruz. Güzel gözüküyor.
-
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/be6c6a5b-8af6-49a2-b478-8927f66325ea)
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/5b922553-ef2f-44cf-9064-dee86486896b)
 
 Ardından bir Retreiver nesnesi oluşturuyoruz bunu kullandığımız VectorStore'u basitçe bir retreiver'a dönüştürerek yapıyoruz. Son olarak kullanacağımız dil modelini (bu projede GPT-3.5 kullanmılmıştır) oluşturuyoruz. (Temperature parameteresini modelin çıktılarını daha deterministik yapmak adına 0.1 gibi düşük bir değere ayarladım)
 
