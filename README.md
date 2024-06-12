@@ -55,7 +55,10 @@ Finally, we ask VectorStore a question and check the answers. The results look g
 
 ![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/5b922553-ef2f-44cf-9064-dee86486896b)
 
-Then we create a Retreiver object that takes a user's question and searches and returns the content related to the question in the VectorStore. We do this by simply converting the VectorStore we use into a Retreiver. Finally, we create the language model we will use (we used GPT-3.5 in this project).
+Next, we create a Retreiver object that takes the user's question and searches the VectorStore for content related to the question and returns it. We do this by simply converting the VectorStore we are using into a Retreiver.
+
+Finally, we create the language model we will use. For this you can use an OpenAI model via the LangChain library or you can use any model from the HuggingFace library with “HuggingFacePipeline”.
+
 Note: We set the Temperature parameter to 0.1, which will perform better for this type of question-answer application. With this parameter, we set the model answers to be more deterministic.
 
 ![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/c8e96918-505b-45b3-a682-bec943485f5b)
