@@ -99,6 +99,10 @@ As you can see, in the second question, the model realized that the question was
 
 Now, let's create a simple interface with Gradio for this application, ask questions and see the answers.
 
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/c7eaa189-21cf-43bb-8b2f-c1f56b8cac11)
+
+We created the simple interface. You should be able to access the interface using the link that shown below the code line.
+
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/2c697a78-ec67-475e-85e9-9969af2d62d6)
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/f096c16c-7d11-4543-b91c-e9750935d958)
