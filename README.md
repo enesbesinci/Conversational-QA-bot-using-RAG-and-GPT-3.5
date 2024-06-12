@@ -107,14 +107,15 @@ We created the simple interface. You should be able to access the interface usin
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/f096c16c-7d11-4543-b91c-e9750935d958)
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/74906675-6587-453b-bb29-46ecf97d5604)
+As you see in the picture. The model understood the (relevance?) between the first question and the second question. Let's ask another question.
 
-Sonuçlar oldukça iyi gözüküyor. Elbete bir e-ticaret web sitesinin sahip olduğu veriler ve daha gelişmiş özellikle de Türkçe dilinde daha iyi performans gösteren, örneğin Türkçe veriler ile fine-tuning edilmiş bir model farklı bir performans gösterebilir. Fakat bu tür bir uygulamanın yüksek miktarda kaliteli veri ve daha gelişmiş yöntemlerle kullanıcı memnuniyetini ve tüketim alışkanlıklarını geliştirip değiştireceği açıktır. Bunlara ek olarak RAG yönteminde farklı yaklaşımlar ve yöntemler olduğunu da belirtmek önemlidir. Mesela retreiver üzerinde arama yaparken semantik arama ile birlikte BS-25 türü farklı arama algoritmalalarını kullanmak modelin performansını artırabilir. Fakat bu proje bir giriş mahiyetinde bir örnek proje olduğu için çok detaylara girmedim.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/1e332611-5d74-46e1-ae3a-d7ac6cacec6a)
 
-## Sonuç:
+The results look pretty good. Of course, an e-commerce site's data and more advanced models (especially those that perform better in Turkish, such as fine-tuning with Turkish data) may perform better. On the other hand, it is important to note that there are different approaches and methods in applying the RAG method. For example, using different search algorithms such as BS-25 together with semantic search while searching on the retriever can improve the performance of the model. However, since this project is an introductory example, we will not go into details.
 
-Bu proje, e-ticaret sitelerinde müşterilerin ürünlerle ilgili sorularını hızlı ve doğru bir şekilde cevaplayabilen bir Soru-Cevap uygulaması geliştirme amacına başarılı bir şekilde ulaşmıştır. Retrieval Augmented Generation (RAG) tekniğini kullanarak oluşturulan bu sistem, müşteri memnuniyetini artırmanın yanı sıra 24/7 destek sağlama, detaylı bilgi sunma, geri bildirim toplama ve satışları artırma gibi pek çok fayda sunmaktadır. Uygulamanın basit arayüzü sayesinde kullanıcılar, sorularına anında yanıt alabilirler. Bu proje, yüksek kaliteli veri ve gelişmiş yöntemlerle daha da iyileştirilebilir, ancak mevcut haliyle bile müşteri deneyimini olumlu yönde etkileme potansiyeline sahiptir.
+## Conclusion:
 
+This project has successfully achieved its goal of developing a Q&A application that can answer customers' questions about products quickly and accurately on e-commerce sites. This system, created using the Retrieval Augmented Generation (RAG) technique, offers many benefits such as providing 24/7 support, providing detailed information, collecting feedback and increasing sales, as well as increasing customer satisfaction. Thanks to the application's simple interface, users can get immediate answers to their questions. This project can be further improved with high quality data and advanced methods, but even in its current form it has the potential to positively impact the customer experience.
 
 
 
