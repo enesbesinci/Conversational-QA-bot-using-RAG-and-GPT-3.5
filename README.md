@@ -47,7 +47,7 @@ We have stored our data in a variable called ‘docs’, but there is a problem.
 
 ![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/3e213ff1-8e90-4e12-93a3-0ea2899ec8c5)
 
-Then we need to store the chunked data in a VectorStore. For this we need a VectorStore and an Embeeding model to embed the chunks. For this, you can use different Embeeding models in HuggingFace (you can search by typing Setence-Transformer). But since we are working with Turkish data in this project, we will continue with OpenAI's Embeeding model. The reason for this is that I tried different Embeeding models in HuggingFace, but I got the most successful result with OpenAI's Embeeding model.
+Then we need to store the chunked data in a VectorStore. To do this, we need a VectorStore and an embedding model to embed the chunks. There are several embeeding models available in HuggingFace (you can search for them by typing Setence-Transformer). But since we are working with Turkish data in this project, we will continue with OpenAI's embeeding model. The reason for this is that I tried different embeeding models in HuggingFace, but I got the most successful result with OpenAI's embeeding model. We will also be using Meta's VectorStore, FAISS (Facebook AI Similarity Search).
 
 ![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/969d6396-5508-4c6d-81d9-03579f2192d8)
 
@@ -55,43 +55,49 @@ Finally, we ask VectorStore a question and check the answers. The results look g
 
 ![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/5b922553-ef2f-44cf-9064-dee86486896b)
 
-Ardından bir Retreiver nesnesi oluşturuyoruz bunu kullandığımız VectorStore'u basitçe bir retreiver'a dönüştürerek yapıyoruz. Son olarak kullanacağımız dil modelini (bu projede GPT-3.5 kullanmılmıştır) oluşturuyoruz. (Temperature parameteresini modelin çıktılarını daha deterministik yapmak adına 0.1 gibi düşük bir değere ayarladım)
+Then we create a Retreiver object that takes a user's question and searches and returns the content related to the question in the VectorStore. We do this by simply converting the VectorStore we use into a Retreiver. Finally, we create the language model we will use (we used GPT-3.5 in this project).
+Note: We set the Temperature parameter to 0.1, which will perform better for this type of question-answer application. With this parameter, we set the model answers to be more deterministic.
 
-Şimdi örnek bir prompt oluşturuyoruz, bu promp'da bildiğiniz gibi context kısmına soru ile alaklı VectoreStore'dan getirilen içerikler gelecek. Question kısmında ise kullanıcını sorusu yer alacak. Ardından LangChain'in bize sunduğu Chain yönteminden yararlanarak retreiver'dan getirilen sonucu prompt'un içine alan, ardından bunu LLM'ye aktaran ve son olarak LLM çıktısnı daha anlaşılabilir bir şekilde osn kullanıcıyı gösteren bir OutputParser kullanarak bir chain (zincir) oluşturuyoruz.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/c8e96918-505b-45b3-a682-bec943485f5b)
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/1f931ed5-6c5d-4dc8-bd92-ccafd2e7ced4)
 
-Bir örnek prompt girelim ve sonuçları görelim.
+Now we are creating a sample prompt. The ‘Question’ section will contain the user's question. In the ‘context’ section, the content taken from VectoreStore related to the question will come. Then we will bring our components together using the ‘LCEL Runnable’ protocol LangChain offers us. Thus, we will have a chain that takes the content from the Retreiver into the prompt, then passes it to the LLM with the question, and finally an OutputParser that shows the LLM output to the end user in a more understandable way.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/86b11546-0a24-47a1-b762-3c3a6a350c0f)
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/bf1cb90d-2a42-4db3-8702-92f11307b7d8)
 
-Veri setini ben hazırladığım için böyle bir bilginin soru-cevap kısmında var olduğunu biliyorum, isterseniz bu chain'in ayrıca bu çıktıyı verirken kullandığı kaynakları döndürmnesini de isteyebilirsiniz.
+With an example prompt and let's see the results.
 
-Fakat burada bir sorunumuz daha var. Bu sohbet robotu geçmişi hatırlayamıyor. Bir örnek üzerinden açıklayayım.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/25a43424-3470-4442-b14e-219ba72e7cf5)
 
-Mesela sohbet robotuna "İphone 14'ün kaç megapiksellik bir kamerası vardır" diye bir soru sorduğunuzda model "20 megapiksel" diye bir yanıt döndürdüğünü varsayalım. Ardından "peki bu telefonun fiyatı nedir?" gibi bir soru sorduğunuz zaman model bu sorunun bir önceki soru ile bağlantılı bir soru olduğunu anlayamaycaktır. Dolayısıyla bu modele eski mesajları (sohbeti) hatırlayabilmesi için bir chat_history ve kendisine gelen soruyu retreiver üzerinde doğru bir şekilde arama yapabilmesi için yeniden dizayn eden bir LLM daha gerekli. Yani az önce sorulan devam sorusunu (peki bu telefonun fiyatı nedir?) alıp (İphone 14'ün fiyatı nedir?) şeklinde düzenlememiz lazım.
+As you know, since I prepared the dataset, I know that the answer is correct (our fictitious business makes 12 instalments to credit card).
 
-İlk önce LLM'ye devam sorularını retreiver üzerinde arama yapabilmek için bağlamsallaştırmasını gerektiğini belirten bir prompt oluşturalım.
+But we have a problem here. This chatbot cannot remember the past. Let me explain with an example.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/248ef05f-c3cc-4f14-90b4-088514e2f82e)
+For example, if you ask the chatbot a question like "How many megapixels does the iPhone 14 camera have?", the model will say "20 megapixels". If you then ask the chatbot a follow-up question like "So what's the price of this phone?", the model won't realise that the follow-up question is related to the previous question.
 
-Ardından içinde hem yukarıda belirtilen "system prompt" hem geçmiş sohbeti barındıran "chat history" hem de kullanıcını sorusunu barındıran bir prompt oluşturalım ve bu prompt ile LLM'i create_stuff_documents_chain fonksiyonun kullanarak birleştirelim.
+So we need a chat_history to remember old messages (chat), and an LLM to reformulate the follow-up question so that it can correctly search for the follow-up question. So we need to take the follow-up question (What is the price of this phone?) and rephrase it as (What is the price of the iPhone 14?). Note that the retreiver will return bad respones for the first question.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/a170414e-dd8f-487b-a476-20b5247dffb8)
+First, let's create a prompt telling the LLM that it needs to contextualize the follow-up questions in order to search them on the retriever.
 
-Şimdi tüm bu oluşturduğumuz fonksiyonları bir araya getirelim.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/275d2da8-4df4-4610-93db-aeaf130414d8)
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/b92eb5ef-7207-4e9f-b422-bbab5c791962)
+Then, let's create a prompt that contains both the "system prompt" mentioned above, the "chat history" containing the past chat, and the user's question, and combine this prompt with the LLM using the create_stuff_documents_chain function.
 
-Şimdi bir kaç örnek soru soralım ve modelin cevaplarını görelim.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/aac659ca-9b2f-40a1-8309-c0c1c7ac49fe)
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/14a3d667-b947-434c-bcd2-93f6976b1506)
+Now let's put all these functions we created together.
 
-![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/08fa5558-e5bc-466c-b078-5433a0ee7ed3)
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/fefdb071-082b-42bc-b028-3ff10b353835)
 
-Gördüğünüz gibi model ikinci soruda sorunun ilk soru ile bağlantılı olduğunu anladı, soruyu tekrar düzenledi ve tüm adımlarını gerçekleştirerek soruyu cevapladı.
+Now let's ask a few sample questions and see the model's response.
 
-Şimdi bu uygulama için Gradfio ile basit bir arayüz oluşturup tekrar sorular soralım ve cevapları görelim.
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/c8722d18-c7b7-41fb-9d4b-3b5387b3009a)
+
+![image](https://github.com/enesbesinci/Conversational-QA-bot-using-RAG-and-OPENAI/assets/110482608/d5d34797-b3f1-4635-9a55-bfaae9faeca3)
+
+As you can see, in the second question, the model realized that the question was related to the first question, rearranged the question and then answered it.
+
+Now, let's create a simple interface with Gradio for this application, ask questions and see the answers.
 
 ![image](https://github.com/enesbesinci/QA-using-RAG-and-OPENAI/assets/110482608/2c697a78-ec67-475e-85e9-9969af2d62d6)
 
